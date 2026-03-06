@@ -1,530 +1,140 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8"   viewport="width=device-width, initial-scale=1.0">
-<title>AI Tool Builder</title>
-
-<style>
-
-/* GLOBAL */
-
-*{
-box-sizing:border-box;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-}
-
-body{
-margin:0;
-background:#f2f2f7;
-overflow-x:hidden;
-font-size:18px;
-}
-
-/* APP AREA */
-
-.app{
-padding:20px;
-padding-bottom:110px;
-max-width:600px;
-margin:auto;
-}
-
-/* INPUTS */
-
-input,textarea{
-width:100%;
-padding:18px;
-border-radius:18px;
-border:none;
-background:white;
-margin-top:15px;
-font-size:17px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
-}
-
-textarea{
-height:160px;
-resize:none;
-}
-
-/* BUTTON */
-
-button{
-width:100%;
-padding:18px;
-border:none;
-border-radius:18px;
-background:#007aff;
-color:white;
-font-weight:600;
-margin-top:15px;
-font-size:17px;
-}
-
-/* TOOL CARD */
-
-.tool{
-background:white;
-padding:18px;
-border-radius:18px;
-margin-top:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 4px 12px rgba(0,0,0,0.07);
-}
-
-.tool button{
-width:auto;
-margin-left:8px;
-padding:10px 14px;
-font-size:14px;
-}
-
-/* NAVBAR */
-
-.navbar{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:90px;
-backdrop-filter:blur(25px);
-background:rgba(255,255,255,0.7);
-border-top:1px solid rgba(0,0,0,0.1);
-display:flex;
-}
-
-.navbtn{
-flex:1;
-border:none;
-background:none;
-font-size:18px;
-color:#444;
-}
-
-.navbtn.active{
-color:#007aff;
-font-weight:600;
-}
-
-/* SECTIONS */
-
-.section{
-display:none;
-opacity:0;
-transform:translateY(15px);
-transition:all .35s ease;
-}
-
-.section.active{
-display:block;
-opacity:1;
-transform:translateY(0);
-}
-
-/* HAMBURGER */
-
-.menu{
-position:fixed;
-top:20px;
-left:20px;
-font-size:30px;
-cursor:pointer;
-z-index:20;
-}
-
-/* DRAWER */
-
-.drawer{
-position:fixed;
-top:0;
-left:-280px;
-width:260px;
-height:100%;
-background:white;
-box-shadow:2px 0 15px rgba(0,0,0,0.25);
-padding:25px;
-transition:.35s;
-z-index:19;
-}
-
-.drawer.open{
-left:0;
-}
-
-/* LOADING OVERLAY */
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:30;
-}
-
-.overlay.show{
-display:flex;
-}
-
-/* LOADING BOX */
-
-.box{
-background:white;
-padding:28px;
-border-radius:22px;
-text-align:center;
-width:85%;
-max-width:320px;
-}
-
-/* SPINNER */
-
-.spinner{
-width:48px;
-height:48px;
-border:4px solid #ddd;
-border-top:4px solid #007aff;
-border-radius:50%;
-animation:spin 1s linear infinite;
-margin:auto;
-margin-bottom:12px;
-}
-
-@keyframes spin{
-to{transform:rotate(360deg)}
-}
-
-#credit{
-    position: absolute;
-    font-size:14px;
-    color:#797979;
-    margin-top:10px;
-    text-align:center;
-    font-family: monospace;
-    right: 10px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Tools</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 
-<div class="menu" onclick="toggleMenu()">☰</div>
-
-<div class="drawer" id="drawer">
-
-<h3>API Settings</h3>
-
-<button onclick="changeAPI()">Change API Key</button>
-
-<button onclick="deleteAPI()">Delete API Key</button>
-
-</div>
-
-
-<!-- LOGIN -->
-
-<div class="login" id="login">
-
-<div class="loginbox">
-
-<h2>Enter API Key</h2>
-
-<input id="apikeyinput" placeholder="OpenRouter API Key">
-
-<button id="continueBtn">Continue</button>
-
-</div>
-
-</div>
-
-
-
-<div class="app" id="app">
-
-<div id="create" class="section active">
-
-<h2>Create Tool</h2>
-
-<input id="name" placeholder="Tool Name">
-
-<textarea id="prompt" placeholder="Describe the tool..."></textarea>
-
-<button onclick="generate()">Generate Tool</button>
-
-</div>
-
-<div id="tools" class="section">
-
-<h2>Your Tools</h2>
-
-<div id="toolList"></div>
-
-</div>
-
-</div>
-
-
-
-<!-- NAVBAR -->
-
-<div class="navbar">
-
     <span id="credit">Made By Arko</span>
 
-<button class="navbtn active" onclick="tab('create')">Create</button>
+    <div class="menu">
+        <input type="checkbox" id="checkbox" onchange="toggleMenu()">
+        <label for="checkbox" class="toggle">
 
-<button class="navbtn" onclick="tab('tools')">Tools</button>
+            <div class="bars" id="bar1"></div>
+            <div class="bars" id="bar2"></div>
+            <div class="bars" id="bar3"></div>
+        </label>
+    </div>
 
-</div>
+    <label for="checkbox" class="blank_exit"></label>
 
 
+    <div class="drawer" id="drawer">
 
-<!-- OVERLAY -->
+        <h3>Settings</h3>
 
-<div class="overlay" id="overlay">
+        <button onclick="changeAPI()">Change API Key</button>
 
-<div class="box">
+        <button onclick="deleteAPI()">Delete API Key</button>
 
-<div class="spinner" id="spin"></div>
+        <button>About App</button>
 
-<p id="msg">Loading</p>
+        <button>Contact Developer</button>
 
-</div>
 
-</div>
 
+    </div>
 
 
-<script>
+    <!-- LOGIN -->
 
-let tools=JSON.parse(localStorage.getItem("tools")||"{}")
+    <div class="login" id="login">
 
-/* LOGIN FIX */
+        <div class="loginbox">
+            <button id="cross" onclick="closelogin()">×</button>
 
-document.getElementById("continueBtn").onclick=function(){
+            <h2>Enter API Key</h2>
 
-let key=document.getElementById("apikeyinput").value.trim()
+            <input id="apikeyinput" placeholder="OpenRouter API Key">
 
-if(!key)return
+            <button id="continueBtn">Continue</button>
+            <p>
+                Don't have an API key? <a href="#">How to get an API key?</a>
+            </p>
+        </div>
 
-localStorage.setItem("api_key",key)
+    </div>
 
-document.getElementById("login").style.display="none"
+    
 
-}
 
-/* AUTO LOGIN */
+    <div class="app" id="app">
 
-if(localStorage.getItem("api_key")){
-document.getElementById("login").style.display="none"
-}
+        <div id="create" class="section active">
 
-/* MENU */
+            <h2>Create Tool</h2>
 
-function toggleMenu(){
+            <input id="name" placeholder="Tool Name">
 
-document.getElementById("drawer").classList.toggle("open")
+            <textarea id="prompt" placeholder="Describe the tool..."></textarea>
 
-}
+            <button onclick="generate()">Generate Tool</button>
 
-/* API SETTINGS */
+        </div>
 
-function changeAPI(){
 
-document.getElementById("login").style.display="flex"
 
-}
+        <div id="tools" class="section">
 
-function deleteAPI(){
+            <h2>Your Tools</h2>
 
-localStorage.removeItem("api_key")
+            <div id="toolList"></div>
 
-location.reload()
+        </div>
 
-}
+    </div>
 
-/* NAV */
 
-function tab(id){
 
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
+    <!-- NAVBAR -->
 
-document.querySelectorAll(".navbtn").forEach(b=>b.classList.remove("active"))
+    <div class="navbar">
+        <button class="navbtn active" onclick="tab('create')">Create New</button>
+        <button class="navbtn" onclick="tab('tools')">Your Tools</button>
+    </div>
 
-document.getElementById(id).classList.add("active")
 
-event.target.classList.add("active")
 
-}
+    <!-- OVERLAY -->
 
-/* SWIPE */
+    <div class="overlay" id="overlay">
 
-let startX=0
+        <div class="box">
 
-document.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX
-})
+            <!-- From Uiverse.io by dexter-st -->
+            <div class="loader-wrapper" id="spin">
+                <span class="loader-letter">G</span>
+                <span class="loader-letter">e</span>
+                <span class="loader-letter">n</span>
+                <span class="loader-letter">e</span>
+                <span class="loader-letter">r</span>
+                <span class="loader-letter">a</span>
+                <span class="loader-letter">t</span>
+                <span class="loader-letter">i</span>
+                <span class="loader-letter">n</span>
+                <span class="loader-letter">g</span>
 
-document.addEventListener("touchend",e=>{
+                <div class="loader"></div>
+            </div>
 
-let endX=e.changedTouches[0].clientX
 
-if(startX-endX>80) tab("tools")
+            <p id="msg"></p>
 
-if(endX-startX>80) tab("create")
+        </div>
 
-})
+    </div>
 
-/* TOOL STORAGE */
 
-function saveTools(){
-localStorage.setItem("tools",JSON.stringify(tools))
-}
 
-function renderTools(){
-
-let list=document.getElementById("toolList")
-
-list.innerHTML=""
-
-for(let name in tools){
-
-let div=document.createElement("div")
-
-div.className="tool"
-
-div.innerHTML=`
-<span>${name}</span>
-<div>
-<button onclick="openTool('${name}')">Open</button>
-<button onclick="deleteTool('${name}')">Delete</button>
-</div>
-`
-
-list.appendChild(div)
-
-}
-
-}
-
-function openTool(name){
-
-let html=tools[name]
-
-let w=window.open()
-
-w.document.write(html)
-
-w.document.close()
-
-}
-
-function deleteTool(name){
-
-delete tools[name]
-
-saveTools()
-
-renderTools()
-
-}
-
-/* OVERLAY */
-
-function showMessage(text,loading=false){
-
-document.getElementById("overlay").style.display="flex"
-
-document.getElementById("msg").innerText=text
-
-document.getElementById("spin").style.display=loading?"block":"none"
-
-if(!loading){
-setTimeout(()=>document.getElementById("overlay").style.display="none",2000)
-}
-
-}
-
-/* GENERATE */
-
-async function generate(){
-
-let name=document.getElementById("name").value
-let prompt=document.getElementById("prompt").value
-
-if(!name||!prompt)return
-
-showMessage("Generating Tool...",true)
-
-try{
-
-let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{
-
-method:"POST",
-
-headers:{
-"Authorization":"Bearer "+localStorage.getItem("api_key"),
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-model:"deepseek/deepseek-chat",
-
-messages:[{
-role:"user",
-content:`
-Generate a complete HTML file.
-Start with <!DOCTYPE html>
-End with </html>.
-Include CSS and JS.
-
-User request:
-${prompt}
-`
-}]
-
-})
-
-})
-
-let data=await res.json()
-
-let raw=data.choices[0].message.content
-
-raw=raw.replace(/```html/g,"").replace(/```/g,"")
-
-let match = raw.match(/<!DOCTYPE html>[\s\S]*<\/html>/i)
-
-let html=match?match[0]:raw
-
-tools[name]=html
-
-saveTools()
-
-renderTools()
-
-showMessage("Tool Created")
-
-}catch{
-
-showMessage("Error generating tool")
-
-}
-
-}
-
-renderTools()
-
-</script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
