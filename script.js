@@ -30,6 +30,17 @@ function toggleMenu() {
 
 }
 
+
+// ABOUT
+function open_about() {
+
+    document.getElementById("about").style.display = "flex"
+}
+
+function close_about() {
+
+    document.getElementById("about").style.display = "none"
+}
 /* API SETTINGS */
 
 function changeAPI() {
@@ -39,7 +50,7 @@ function changeAPI() {
 
 }
 
-function closelogin(){
+function closelogin() {
     document.getElementById("login").style.display = "none"
     document.getElementById("cross").style.display = "none"
 }
@@ -103,13 +114,14 @@ function openTool(name) {
 
     let html = tools[name]
 
-    let w = window.open()
+    let blob = new Blob([html], { type: "text/html" })
 
-    w.document.write(html)
+    let url = URL.createObjectURL(blob)
 
-    w.document.close()
+    window.open(url, "_blank")
 
 }
+
 
 function deleteTool(name) {
 
@@ -120,6 +132,18 @@ function deleteTool(name) {
     renderTools()
 
 }
+
+// MAIN LOADING
+
+window.addEventListener("load", function () {
+
+    setTimeout(function () {
+
+        document.getElementById("main-loading").style.display = "none";
+
+    }, 2000);
+
+});
 
 /* OVERLAY */
 
