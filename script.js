@@ -30,6 +30,13 @@ function toggleMenu() {
 
 }
 
+/// /* API GUIDE */
+
+function open_api_guide() {
+
+    document.getElementById("apiGuide").style.display = "flex";
+
+}
 
 // ABOUT
 function open_about() {

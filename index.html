@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Tools</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <link rel="icon" type="image/png" sizes="32x32" href="icon32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="icon192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icon512.png">
@@ -127,12 +127,73 @@
 
             <button id="continueBtn">Continue</button>
             <p>
-                Don't have an API key? <a href="#">How to get an API key?</a>
+                Don't have an API key? <a href="#" onclick="open_api_guide()">How to get an API key?</a>
             </p>
         </div>
 
     </div>
 
+    <div id="apiGuide" class="popup">
+
+        <div class="popup-box">
+
+            <button class="close-btn" onclick="document.getElementById('apiGuide').style.display='none'">✕</button>
+
+            <h1>How to Get an <br>OpenRouter API Key ?</h1>
+
+            <p class="intro">
+                Follow these simple steps to generate your OpenRouter API key and use it inside Infinity Tools.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+                    <span>1</span>
+                    <p>Go to the OpenRouter website: <br>
+                        <a href="https://openrouter.ai" target="_blank">https://openrouter.ai</a>
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span>2</span>
+                    <p>Click <b>Sign Up</b> or <b>Login</b> using your Google or GitHub account.</p>
+                </div>
+
+                <div class="step">
+                    <span>3</span>
+                    <p>After logging in, open your <b>Dashboard</b>.</p>
+                </div>
+
+                <div class="step">
+                    <span>4</span>
+                    <p>Navigate to the <b>API Keys</b> section.</p>
+                </div>
+
+                <div class="step">
+                    <span>5</span>
+                    <p>Click <b>Create Key</b> and copy the generated API key.</p>
+                </div>
+
+                <div class="step">
+                    <span>6</span>
+                    <p>Paste the API key inside Infinity Tools when prompted.</p>
+                </div>
+
+            </div>
+
+            <h2>Video Tutorial</h2>
+
+            <div class="video">
+
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZELx_OzYAQo?si=d5w55Pq9DMekSG7u"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+            </div>
+
+        </div>
+    </div>
 
 
     <div id="about">
@@ -158,6 +219,7 @@
 
                 <div><b>Version:</b> 1.0.0</div>
                 <div><b>Developer:</b> Arko Sarkar</div>
+                <div><b>Email:</b> arkos9564@gmail.com</div>
                 <div><b>Platform:</b> Web Application</div>
                 <div><b>Technology:</b> HTML, CSS, JavaScript</div>
 
