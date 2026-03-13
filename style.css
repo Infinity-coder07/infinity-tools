@@ -891,3 +891,19 @@ box-shadow:0 10px 30px rgba(0,0,0,.08); */
   border-radius: 8px;
   cursor: pointer;
 }
+
+
+/* COMPUTER DISPLAY */
+
+@media screen and (min-width:500px) {
+  #cross{
+    right: -170px;
+    top: 19%;
+  }
+
+  .navbar{
+    width: 30vw;
+    margin-left: 35vw;                        
+  }
+  
+}
