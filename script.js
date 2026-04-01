@@ -148,7 +148,7 @@ window.addEventListener("load", function () {
 
         document.getElementById("main-loading").style.display = "none";
 
-    }, 2000);
+    }, 300);
 
 });
 
