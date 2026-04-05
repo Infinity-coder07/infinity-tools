@@ -4,15 +4,10 @@ let tools = JSON.parse(localStorage.getItem("tools") || "{}")
 // /* LOGIN FIX */
 
 document.getElementById("continueBtn").onclick = function () {
-
     let key = document.getElementById("apikeyinput").value.trim()
-
     if (!key) return
-
     localStorage.setItem("api_key", key)
-
     document.getElementById("login").style.display = "none"
-
 }
 
 // /* AUTO LOGIN */
@@ -33,41 +28,29 @@ function toggleMenu() {
 /// /* API GUIDE */
 
 function open_api_guide() {
-
     document.getElementById("apiGuide").style.display = "flex";
-
 }
 
 // ABOUT
 function open_about() {
-
     document.getElementById("about").style.display = "flex"
 }
-
 function close_about() {
-
     document.getElementById("about").style.display = "none"
 }
 /* API SETTINGS */
 
 function changeAPI() {
-
     document.getElementById("login").style.display = "flex"
-    document.getElementById("cross").style.display = "block"
-
+    document.getElementById("cross").style.display = "flex"
 }
-
 function closelogin() {
     document.getElementById("login").style.display = "none"
     document.getElementById("cross").style.display = "none"
 }
-
 function deleteAPI() {
-
     localStorage.removeItem("api_key")
-
     location.reload()
-
 }
 
 /* NAV */
@@ -148,7 +131,7 @@ window.addEventListener("load", function () {
 
         document.getElementById("main-loading").style.display = "none";
 
-    }, 300);
+    }, 1500);
 
 });
 
@@ -223,11 +206,11 @@ ${prompt}
 
         tools[name] = html
 
-        saveTools()
+        saveTools();
 
-        renderTools()
+        renderTools();
 
-        showMessage("Tool Created")
+        showMessage("Tool Created");
 
     } catch {
 
@@ -237,4 +220,20 @@ ${prompt}
 
 }
 
-renderTools()
+renderTools();
+
+
+function delete_all() {
+    document.getElementById("delete-overlay").style.display = "none";
+    localStorage.removeItem("tools");
+    tools = {};
+    renderTools();
+}
+
+
+document.querySelectorAll(".question").forEach(q => {
+    q.addEventListener("click", () => {
+        q.classList.toggle("active");
+        q.querySelector(".q img").style.transform = q.classList.contains("active") ? "rotate(180deg)" : "rotate(0deg)";
+    });
+});
