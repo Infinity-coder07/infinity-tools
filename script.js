@@ -4,10 +4,13 @@ let tools = JSON.parse(localStorage.getItem("tools") || "{}")
 // /* LOGIN FIX */
 
 document.getElementById("continueBtn").onclick = function () {
-    let key = document.getElementById("apikeyinput").value.trim()
-    if (!key) return
-    localStorage.setItem("api_key", key)
-    document.getElementById("login").style.display = "none"
+    let key = document.getElementById("apikeyinput").value.trim();
+    if (!key) return;
+    localStorage.setItem("api_key", key);
+    document.getElementById("login").style.display = "none";
+    setTimeout(() => {
+                location.reload(true);
+            }, 200);
 }
 
 // /* AUTO LOGIN */
@@ -215,6 +218,9 @@ ${prompt}
     } catch {
 
         showMessage("Error generating tool")
+        setTimeout(() => {
+                location.reload(true);
+            }, 2000);
 
     }
 
@@ -228,6 +234,9 @@ function delete_all() {
     localStorage.removeItem("tools");
     tools = {};
     renderTools();
+    setTimeout(() => {
+                location.reload(true);
+            }, 200);
 }
 
 
