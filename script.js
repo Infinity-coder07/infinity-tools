@@ -152,34 +152,32 @@ function tab(id) {
 
 /* TOOL STORAGE */
 
+let tools = JSON.parse(localStorage.getItem("tools")) || {}
+
 function saveTools() {
     localStorage.setItem("tools", JSON.stringify(tools))
 }
 
 function renderTools() {
-
     let list = document.getElementById("toolList")
-
     list.innerHTML = ""
 
+    console.log(tools) // debug
+
     for (let name in tools) {
-
         let div = document.createElement("div")
-
         div.className = "tool"
 
         div.innerHTML = `
 <span>${name}</span>
 <div>
-<button onclick="openTool('${name}')">Open</button>
-<button onclick="deleteTool('${name}')">Delete</button>
+<button onclick="openTool(${JSON.stringify(name)})">Open</button>
+<button onclick="deleteTool(${JSON.stringify(name)})">Delete</button>
 </div>
 `
 
         list.appendChild(div)
-
     }
-
 }
 
 function openTool(name) {
