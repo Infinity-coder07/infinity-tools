@@ -162,46 +162,60 @@ function renderTools() {
     let list = document.getElementById("toolList")
     list.innerHTML = ""
 
-    console.log(tools) // debug
-
     for (let name in tools) {
         let div = document.createElement("div")
         div.className = "tool"
 
-        div.innerHTML = `
-<span>${name}</span>
-<div>
-<button onclick="openTool(${JSON.stringify(name)})">Open</button>
-<button onclick="deleteTool(${JSON.stringify(name)})">Delete</button>
-</div>
-`
+        let span = document.createElement("span")
+        span.textContent = name
+
+        let btnBox = document.createElement("div")
+
+        let openBtn = document.createElement("button")
+        openBtn.textContent = "Open"
+        openBtn.onclick = () => openTool(name)
+
+        let deleteBtn = document.createElement("button")
+        deleteBtn.textContent = "Delete"
+        deleteBtn.onclick = () => deleteTool(name)
+
+        btnBox.appendChild(openBtn)
+        btnBox.appendChild(deleteBtn)
+
+        div.appendChild(span)
+        div.appendChild(btnBox)
 
         list.appendChild(div)
     }
 }
 
 function openTool(name) {
-
     let html = tools[name]
 
-    let blob = new Blob([html], { type: "text/html" })
+    if (!html) {
+        alert("Tool not found 😢")
+        return
+    }
 
+    let blob = new Blob([html], { type: "text/html;charset=utf-8" })
     let url = URL.createObjectURL(blob)
 
     window.open(url, "_blank")
-
 }
-
 
 function deleteTool(name) {
+    if (!tools[name]) {
+        alert("Tool already gone 😶")
+        return
+    }
 
     delete tools[name]
-
     saveTools()
-
     renderTools()
-
 }
+
+// initial render
+renderTools()
 
 // MAIN LOADING
 
